@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Logs</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+    </style>
+</head>
+<body>
+    <h2>GitHub Actions Run Logs</h2>
+    <table id="csvTable">
+        <thead>
+            <tr><th>Run Datetime</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // Load CSV and populate table
+        d3.csv("runs.csv").then(function(data) {
+            var tbody = d3.select("#csvTable tbody");
+            data.forEach(function(row) {
+                tbody.append("tr").append("td").text(row.run_datetime);
+            });
+        }).catch(function(error) {
+            console.error("Error loading CSV:", error);
+            d3.select("body").append("p").text("Failed to load data. Ensure runs.csv is accessible.");
+        });
+    </script>
+</body>
+</html>
