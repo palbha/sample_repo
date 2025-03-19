@@ -37,3 +37,4 @@ jobs:
         git add runs.csv
         git commit -m "Update runs.csv [CI skip]" || echo "No changes to commit"
         git push
+        
